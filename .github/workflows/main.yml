@@ -1,23 +1,45 @@
 # This is a basic workflow to help you get started with Actions
-name: Node.js CI
 
+name: Hello World 
+
+# Controls when the action will run. 
 on:
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-
-    runs-on: windows-latest
-
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        node_version:
+          - 10
+          - 12
+          - 14
+        architecture:
+          - x64
+        # an extra windows-x86 run:
+        include:
+          - os: windows-2016
+            node_version: 12
+            architecture: x86
+    name: Node ${{ matrix.node_version }} - ${{ matrix.architecture }} on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      with:
-        node-version: '12'
-        architecture: 'x64' 
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node_version }}
+          architecture: ${{ matrix.architecture }}
       - run: npm install --global surge
-      - run: surge ./ easy-hello.surge.sh --token ${{ secrets.SURGE_TOKEN }}
-  
+      - run: surge ./ easy-hello.surge.sh --token ${{ secrects.SURGE.TOKEN }}
