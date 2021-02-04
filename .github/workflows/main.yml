@@ -13,11 +13,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
       with:
-         node-version: '12'
-          architecture: 'x64' # optional, x64 or x86. If not specified, x64 will be used by default
-    - run: npm install --global surge
-    - run: surge ./ easy-hello.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+        node-version: '12'
+        architecture: 'x64' 
+      - run: npm install --global surge
+      - run: surge ./ easy-hello.surge.sh --token ${{ secrets.SURGE_TOKEN }}
   
