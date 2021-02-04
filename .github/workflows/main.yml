@@ -42,4 +42,4 @@ jobs:
           node-version: ${{ matrix.node_version }}
           architecture: ${{ matrix.architecture }}
       - run: npm install --global surge
-      - run: surge ./ easy-hello.surge.sh --token ${{ secrects.SURGE.TOKEN }}
+      - run: surge ./ easy-hello.surge.sh --token ${{ secrets.SURGE.TOKEN }}
