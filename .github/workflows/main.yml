@@ -23,7 +23,6 @@ jobs:
         node_version:
           - 10
           - 12
-          - 14
         architecture:
           - x64
         # an extra windows-x86 run:
